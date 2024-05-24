@@ -19,11 +19,7 @@
   </p>
 </div>
 
-<div align="center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KLnj7ch6big" frameborder="0"></iframe>
-</div>
-
-<!-- [![Alt text](https://img.youtube.com/vi/KLnj7ch6big/0.jpg)](https://www.youtube.com/watch?v=KLnj7ch6big) -->
+[![Alt text](https://img.youtube.com/vi/KLnj7ch6big/0.jpg)](https://www.youtube.com/watch?v=KLnj7ch6big)
 
 [contributors-shield]: https://img.shields.io/github/contributors/ZHU-Zhiyu/NVS_Solver.svg?style=for-the-badge
 [contributors-url]: https://github.com/ZHU-Zhiyu/NVS_Solver/graphs/contributors
