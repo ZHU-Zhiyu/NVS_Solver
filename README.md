@@ -19,7 +19,7 @@
   </p>
 </div>
 
-<center>[![Alt text](https://img.youtube.com/vi/KLnj7ch6big/0.jpg)](https://www.youtube.com/watch?v=KLnj7ch6big)<\center>
+<center>[![Alt text](https://img.youtube.com/vi/KLnj7ch6big/0.jpg)](https://www.youtube.com/watch?v=KLnj7ch6big)</center>
 
 [contributors-shield]: https://img.shields.io/github/contributors/ZHU-Zhiyu/NVS_Solver.svg?style=for-the-badge
 [contributors-url]: https://github.com/ZHU-Zhiyu/NVS_Solver/graphs/contributors
