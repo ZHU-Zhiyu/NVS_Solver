@@ -29,3 +29,5 @@
 [stars-url]: https://github.com/ZHU-Zhiyu/NVS_Solver/stargazers
 [issues-shield]: https://img.shields.io/github/issues/ZHU-Zhiyu/NVS_Solver.svg?style=for-the-badge
 [issues-url]: https://github.com/ZHU-Zhiyu/NVS_Solver/issues
+[license-shield]: https://img.shields.io/github/license/ZHU-Zhiyu/NVS_Solver.svg?style=for-the-badge
+[license-url]: https://github.com/ZHU-Zhiyu/NVS_Solver/blob/master/LICENSE.txt
