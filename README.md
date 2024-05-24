@@ -20,7 +20,7 @@
 </div>
 
 <div align="center">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KLnj7ch6big" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KLnj7ch6big" frameborder="0"></iframe>
 </div>
 
 <!-- [![Alt text](https://img.youtube.com/vi/KLnj7ch6big/0.jpg)](https://www.youtube.com/watch?v=KLnj7ch6big) -->
