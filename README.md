@@ -2,7 +2,7 @@
 <a name="readme-top"></a>
 
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
+<!-- [![MIT License][license-shield]][license-url] -->
 <!-- [![MyHomePage][linkedin-shield]][linkedin-url] -->
 
 <!-- PROJECT LOGO -->
