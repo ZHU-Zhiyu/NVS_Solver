@@ -11,6 +11,8 @@
 
   <h3 align="center">NVS-Solver: Video Diffusion Model as Zero-Shot Novel View Synthesizer</h3>
   <p align="center">
+    <a href="https://arxiv.org/abs/2405.15364">Arxiv</a>
+    ·
     <a href="https://github.com/ZHU-Zhiyu/NVS_Solver/issues">Report Bug</a>
     ·
     <a href="https://github.com/ZHU-Zhiyu/NVS_Solver/issues">Request Feature</a>
@@ -25,6 +27,13 @@
 | NVS-Solver (DGS)  | <img src='./Assests/Single/Ours_DGS_gif/ignatius.gif' width='200'> | <img src='./Assests/Single/Ours_DGS_gif/family.gif' width='200'> | <img src='./Assests/Single/Ours_DGS_gif/palace.gif' width='200'> | <img src='./Assests/Single/Ours_DGS_gif/church.gif' width='200'> | <img src='./Assests/Single/Ours_DGS_gif/barn.gif' width='200'> |
 | NVS-Solver (Post) | <img src='./Assests/Single/Ours_gif/ignatius.gif' width='200'> | <img src='./Assests/Single/Ours_gif/family.gif' width='200'> | <img src='./Assests/Single/Ours_gif/palace.gif' width='200'> | <img src='./Assests/Single/Ours_gif/church.gif' width='200'> | <img src='./Assests/Single/Ours_gif/barn.gif' width='200'> |
 
+
+| Multi-View       |  Truck                              | Playground | Caterpillar                                | Scan55                                | Scan3                                |
+|----------------|----------------|----------------|----------------|----------------|-----------------|
+| 3D-Aware | <img src='./Assests/multi/ivid_multi_01/truck.gif' width='200'> | <img src='./Assests/multi/ivid_multi_01/3daware_playground.gif' width='200'> | <img src='./Assests/multi/ivid_multi_01/caterpillar.gif' width='200'> | <img src='./Assests/multi/ivid_multi_01/scan55.gif' width='200'> | <img src='./Assests/multi/ivid_multi_01/scan3.gif' width='200'> |
+| MotionCtrl| <img src='./Assests/multi/mctrl_01/truck_R1.gif' width='200'> | <img src='./Assests/multi/mctrl_01/Mctrl_playground_R1.gif' width='200'> | <img src='./Assests/multi/mctrl_01/caterpillar_R1.gif' width='200'> | <img src='./Assests/multi/mctrl_01/scan55_R1.gif' width='200'> | <img src='./Assests/multi/mctrl_01/scan3_R1.gif' width='200'> |
+| NVS-Solver (DGS)  | <img src='./Assests/multi/multi_ours_dgs_01/truck_generated.gif' width='200'> | <img src='./Assests/multi/multi_ours_dgs_01/DGS_playground_generated.gif' width='200'>  | <img src='./Assests/multi/multi_ours_dgs_01/caterpillar_generated.gif' width='200'> | <img src='./Assests/multi/multi_ours_dgs_01/scan55_generated.gif' width='200'> | <img src='./Assests/multi/multi_ours_dgs_01/scan3_generated.gif' width='200'> |
+| NVS-Solver (Post) | <img src='./Assests/multi/ours_01/truck_generated.gif' width='200'> | <img src='./Assests/multi/ours_01/Ours_playground_generated.gif' width='200'> | <img src='./Assests/multi/ours_01/caterpillar_generated.gif' width='200'> | <img src='./Assests/multi/ours_01/scan55_generated.gif' width='200'> | <img src='./Assests/multi/ours_01/scan3_generated.gif' width='200'> |
 
 
 | Mono-Vid       |  Train                              | Bus | Kangroo                                | Train                                | Deer                                | Street                                |
