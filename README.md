@@ -11,13 +11,19 @@
 
   <h3 align="center">NVS-Solver: Video Diffusion Model as Zero-Shot Novel View Synthesizer</h3>
   <p align="center">
-<!--     <a href="https://arxiv.org/abs/2307.04129">Paper</a> -->
-<!--     · -->
+  
     <a href="https://github.com/ZHU-Zhiyu/NVS_Solver/issues">Report Bug</a>
     ·
     <a href="https://github.com/ZHU-Zhiyu/NVS_Solver/issues">Request Feature</a>
   </p>
 </div>
+
+| Video Title       | Video                                |
+|-------------------|--------------------------------------|
+| text2nerf | <video controls width="400" height="300" style="display:block; margin: 0 auto;"><source src="./Assests/Single/Ours/palace.mp4" type="video/mp4"></video> |
+| motionctrl| <video controls width="400" height="300" style="display:block; margin: 0 auto;"><source src="./Assests/Single/Ours/palace.mp4" type="video/mp4"></video> |
+| NVS-Solver (DGS)  | <video controls width="400" height="300" style="display:block; margin: 0 auto;"><source src="./Assests/Single/Ours/palace.mp4" type="video/mp4"></video> |
+| NVS-Solver (Post) | <video controls width="400" height="300" style="display:block; margin: 0 auto;"><source src="./Assests/Single/Ours/palace.mp4" type="video/mp4"></video> |
 
 [![Alt text](https://img.youtube.com/vi/KLnj7ch6big/0.jpg)](https://www.youtube.com/watch?v=KLnj7ch6big)
 
