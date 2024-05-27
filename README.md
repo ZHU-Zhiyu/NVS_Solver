@@ -18,12 +18,12 @@
 </div>
 
 
-| Methods       | Ignatius                                | Family                                | Barn                                | Church                                | Trees                                |
+| Methods       | Ignatius                                | Family                                | Palace                                | Church                                | Trees                                |
 |----------------|----------------|----------------|----------------|----------------|----------------|
-| text2nerf | <img src='./Assests/Single/text2nerf_gif/ignatius.gif' width='200'> | <img src='./Assests/Single/text2nerf_gif/family.gif' width='200'> | <img src='./Assests/Single/text2nerf_gif/barn.gif' width='200'> | <img src='./Assests/Single/text2nerf_gif/church.gif' width='200'> | <img src='./Assests/Single/text2nerf_gif/trees.gif' width='200'> |
-| motionctrl| <img src='./Assests/Single/motionctrl_gif/ignatius.gif' width='200'> | <img src='./Assests/Single/motionctrl_gif/family.gif' width='200'> | <img src='./Assests/Single/motionctrl_gif/barn.gif' width='200'> | <img src='./Assests/Single/motionctrl_gif/church.gif' width='200'> | <img src='./Assests/Single/motionctrl_gif/trees.gif' width='200'> |
-| NVS-Solver (DGS)  | <img src='./Assests/Single/Ours_DGS_gif/ignatius.gif' width='200'> | <img src='./Assests/Single/Ours_DGS_gif/family.gif' width='200'> | <img src='./Assests/Single/Ours_DGS_gif/barn.gif' width='200'> | <img src='./Assests/Single/Ours_DGS_gif/church.gif' width='200'> | <img src='./Assests/Single/Ours_DGS_gif/trees.gif' width='200'> |
-| NVS-Solver (Post) | <img src='./Assests/Single/Ours_gif/ignatius.gif' width='200'> | <img src='./Assests/Single/Ours_gif/family.gif' width='200'> | <img src='./Assests/Single/Ours_gif/barn.gif' width='200'> | <img src='./Assests/Single/Ours_gif/church.gif' width='200'> | <img src='./Assests/Single/Ours_gif/trees.gif' width='200'> |
+| text2nerf | <img src='./Assests/Single/text2nerf_gif/ignatius.gif' width='200'> | <img src='./Assests/Single/text2nerf_gif/family.gif' width='200'> | <img src='./Assests/Single/text2nerf_gif/palace.gif' width='200'> | <img src='./Assests/Single/text2nerf_gif/church.gif' width='200'> | <img src='./Assests/Single/text2nerf_gif/trees.gif' width='200'> |
+| motionctrl| <img src='./Assests/Single/motionctrl_gif/ignatius.gif' width='200'> | <img src='./Assests/Single/motionctrl_gif/family.gif' width='200'> | <img src='./Assests/Single/motionctrl_gif/palace.gif' width='200'> | <img src='./Assests/Single/motionctrl_gif/church.gif' width='200'> | <img src='./Assests/Single/motionctrl_gif/trees.gif' width='200'> |
+| NVS-Solver (DGS)  | <img src='./Assests/Single/Ours_DGS_gif/ignatius.gif' width='200'> | <img src='./Assests/Single/Ours_DGS_gif/family.gif' width='200'> | <img src='./Assests/Single/Ours_DGS_gif/palace.gif' width='200'> | <img src='./Assests/Single/Ours_DGS_gif/church.gif' width='200'> | <img src='./Assests/Single/Ours_DGS_gif/trees.gif' width='200'> |
+| NVS-Solver (Post) | <img src='./Assests/Single/Ours_gif/ignatius.gif' width='200'> | <img src='./Assests/Single/Ours_gif/family.gif' width='200'> | <img src='./Assests/Single/Ours_gif/palace.gif' width='200'> | <img src='./Assests/Single/Ours_gif/church.gif' width='200'> | <img src='./Assests/Single/Ours_gif/trees.gif' width='200'> |
 
 [![Alt text](https://img.youtube.com/vi/KLnj7ch6big/0.jpg)](https://www.youtube.com/watch?v=KLnj7ch6big)
 
