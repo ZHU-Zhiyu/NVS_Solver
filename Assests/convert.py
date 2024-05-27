@@ -51,11 +51,11 @@ def speed_up_folder_of_gifs(input_folder, output_folder, speed_factor):
         sped_up_frames = [frame for i, frame in enumerate(gif) if i % speed_factor == 0]
 
         # Save the sped-up GIF frames as a new GIF
-        imageio.mimsave(output_path, sped_up_frames)
+        imageio.mimsave(output_path, sped_up_frames[:-1])
 
 
 # Example usage
-input_folder = '/data/zhu_19/NVS_Solver/Assests/dynamic/MotionCtrl_gif/'
-output_folder = '/data/zhu_19/NVS_Solver/Assests/dynamic/MotionCtrl_gif_01/'
+input_folder = '/data/zhu_19/NVS_Solver/Assests/dynamic/Ours_DGS_gif/'
+output_folder = '/data/zhu_19/NVS_Solver/Assests/dynamic/Ours_DGS_gif_01/'
 speed_factor = 2  # Increase speed by a factor of 2
 speed_up_folder_of_gifs(input_folder, output_folder, speed_factor)
