@@ -20,10 +20,10 @@
 
 | Methods       | Sequences                                |
 |-------------------|--------------------------------------|
-| text2nerf | <video controls width="400" height="300" style="display:block; margin: 0 auto;"><source src="https://github.com/ZHU-Zhiyu/NVS_Solver/tree/main/Assests/Single/text2nerf/palace.mp4" type="video/mp4"></video> |
-| motionctrl| <video controls width="400" height="300" style="display:block; margin: 0 auto;"><source src="https://github.com/ZHU-Zhiyu/NVS_Solver/tree/main/Assests/Single/motionctrl/palace.mp4" type="video/mp4"></video> |
-| NVS-Solver (DGS)  | <video controls width="400" height="300" style="display:block; margin: 0 auto;"><source src="https://github.com/ZHU-Zhiyu/NVS_Solver/tree/main/Assests/Single/Ours_DGS/palace.mp4" type="video/mp4"></video> |
-| NVS-Solver (Post) | <video controls width="400" height="300" style="display:block; margin: 0 auto;"><source src="https://github.com/ZHU-Zhiyu/NVS_Solver/tree/main/Assests/Single/Ours/palace.mp4" type="video/mp4"></video> |
+| text2nerf | <img src='./Assests/Single/text2nerf_gif/ignatius.gif' width='200'> |
+| motionctrl| <img src='./Assests/Single/motionctrl_gif/ignatius.gif' width='200'> |
+| NVS-Solver (DGS)  | <img src='./Assests/Single/Ours_DGS_gif/ignatius.gif' width='200'> |
+| NVS-Solver (Post) | <img src='./Assests/Single/Ours_gif/ignatius.gif' width='200'> |
 
 [![Alt text](https://img.youtube.com/vi/KLnj7ch6big/0.jpg)](https://www.youtube.com/watch?v=KLnj7ch6big)
 
