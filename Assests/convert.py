@@ -20,7 +20,7 @@ def convert_folder_to_gif(input_folder, output_folder, gif_size):
         clip_resized.write_gif(gif_path)
 
 # Example usage
-input_folder = '/data/zhu_19/NVS_Solver/Assests/Single/motionctrl/'
-output_folder = '/data/zhu_19/NVS_Solver/Assests/Single/motionctrl_gif/'
+input_folder = '/data/zhu_19/NVS_Solver/Assests/dynamic/4dgs/'
+output_folder = '/data/zhu_19/NVS_Solver/Assests/dynamic/4dgs_gif/'
 gif_size = (400, 240)  # Specify the desired size in pixels (width, height)
 convert_folder_to_gif(input_folder, output_folder, gif_size)
