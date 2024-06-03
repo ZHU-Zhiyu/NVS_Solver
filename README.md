@@ -55,3 +55,39 @@
 [issues-url]: https://github.com/ZHU-Zhiyu/NVS_Solver/issues
 [license-shield]: https://img.shields.io/github/license/ZHU-Zhiyu/NVS_Solver.svg?style=for-the-badge
 [license-url]: https://github.com/ZHU-Zhiyu/NVS_Solver/blob/master/LICENSE.txt
+
+## Getting Started
+
+### Dependencies
+
+* Linux
+* Anaconda 3
+* Python 3.9
+* CUDA 12.0
+* RTX A6000
+
+### Installing
+
+To get started, please create the virtual environment by:
+```
+python -m venv .env
+source .env/bin/activate
+```
+Please install the PyTorch by:
+```
+pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/cu121
+```
+Please install the [diffusers](https://huggingface.co/docs/diffusers/index) by:
+```
+pip install diffusers["torch"] transformers
+pip install accelerate
+pip install git+https://github.com/huggingface/diffusers
+```
+### Inference
+
+Run
+```
+bash demo.sh
+```
+
+
