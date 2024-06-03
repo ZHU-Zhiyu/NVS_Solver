@@ -85,6 +85,10 @@ pip install diffusers["torch"] transformers
 pip install accelerate
 pip install -e ".[torch]"
 ```
+Please install required packages by:
+```
+pip install -r requirements.txt
+```
 ### Inference
 
 Run
