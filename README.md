@@ -77,11 +77,13 @@ Please install the PyTorch by:
 ```
 pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/cu121
 ```
+We use PyTorch 2.2.1 with CUDA 12.0, please install the version corresponding to your CUDA.
+
 Please install the [diffusers](https://huggingface.co/docs/diffusers/index) by:
 ```
 pip install diffusers["torch"] transformers
 pip install accelerate
-pip install git+https://github.com/huggingface/diffusers
+pip install -e ".[torch]"
 ```
 ### Inference
 
