@@ -92,4 +92,6 @@ Run
 bash demo.sh
 ```
 
+## Acknowledgement
+Our code is based on [diffusers](https://huggingface.co/docs/diffusers/index).
 
