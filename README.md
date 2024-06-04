@@ -54,7 +54,7 @@
 [license-shield]: https://img.shields.io/github/license/ZHU-Zhiyu/NVS_Solver.svg?style=for-the-badge
 [license-url]: https://github.com/ZHU-Zhiyu/NVS_Solver/blob/master/LICENSE.txt
 
-## Getting Started [We are preparing the code for arbitrary poses and scene.]
+## Getting Started [We are preparing the code for arbitrary poses and scenes.]
 
 ### Dependencies
 
