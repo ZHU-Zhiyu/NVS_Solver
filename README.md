@@ -43,8 +43,6 @@
 | NVS-Solver (DGS)  | <img src='./Assets/dynamic/Ours_DGS_gif_01/DGS_train52.gif' width='200'> | <img src='./Assets/dynamic/Ours_DGS_gif_01/dgs_bus1.gif' width='200'>  | <img src='./Assets/dynamic/Ours_DGS_gif_01/kanroo1.gif' width='200'> | <img src='./Assets/dynamic/Ours_DGS_gif_01/DGS_train31.gif' width='200'> | <img src='./Assets/dynamic/Ours_DGS_gif_01/deer1.gif' width='200'> | <img src='./Assets/dynamic/Ours_DGS_gif_01/street1.gif' width='200'> |
 | NVS-Solver (Post) | <img src='./Assets/dynamic/Ours_gif_01/Ours_train52.gif' width='200'> | <img src='./Assets/dynamic/Ours_gif_01/Ours_bus1.gif' width='200'> | <img src='./Assets/dynamic/Ours_gif_01/kangroo1.gif' width='200'> | <img src='./Assets/dynamic/Ours_gif_01/Ours_train31.gif' width='200'> | <img src='./Assets/dynamic/Ours_gif_01/deer1.gif' width='200'> | <img src='./Assets/dynamic/Ours_gif_01/street1.gif' width='200'> |
 
-[![Alt text](https://img.youtube.com/vi/KLnj7ch6big/0.jpg)](https://www.youtube.com/watch?v=KLnj7ch6big)
-
 [contributors-shield]: https://img.shields.io/github/contributors/ZHU-Zhiyu/NVS_Solver.svg?style=for-the-badge
 [contributors-url]: https://github.com/ZHU-Zhiyu/NVS_Solver/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/ZHU-Zhiyu/NVS_Solver.svg?style=for-the-badge
@@ -56,7 +54,7 @@
 [license-shield]: https://img.shields.io/github/license/ZHU-Zhiyu/NVS_Solver.svg?style=for-the-badge
 [license-url]: https://github.com/ZHU-Zhiyu/NVS_Solver/blob/master/LICENSE.txt
 
-## Getting Started
+## Getting Started [We are preparing the code for arbitrary poses and scene.]
 
 ### Dependencies
 
