@@ -1148,9 +1148,9 @@ def search_hypers(pose,dists,sigmas,save_path):
     sigmas = sigmas[:-1]
     sigmas_max = max(sigmas)
 
-    v1_list = np.arange(50, 1001, 50)
-    v2_list = np.arange(10, 101, 10)
-    v3_list = np.linspace(0.001, 0.009, 9)
+    v2_list = np.arange(50, 1001, 50)
+    v3_list = np.arange(10, 101, 10)
+    v1_list = np.linspace(0.001, 0.009, 9)
     zero_count_default = 0
     index_list = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
     for v1 in v1_list:
@@ -1167,15 +1167,15 @@ def search_hypers(pose,dists,sigmas,save_path):
                         else:
                             dist_t = dists[tau]
 
-                            Q = v2 * abs((dist_t)**2) - 2*v1*sigma_n/(2*math.pi)**0.5
+                            Q = v3 * abs((tau_-tau_p)) - v2*sigma_n
                             k = 0.8
                             b = -0.2
 
-                            lambda_t_1 = (-(2*v3 + k*Q) + ((2*k*v3+k*Q)**2 - 4*k*v3*(k*v3+Q*b))**0.5)/(2*k*v3)
-                            lambda_t_2 = (-(2*v3 + k*Q) - ((2*k*v3+k*Q)**2 - 4*k*v3*(k*v3+Q*b))**0.5)/(2*k*v3)
-                            v3_ = -v3
-                            lambda_t_3 = (-(2*v3_ + k*Q) + ((2*k*v3_+k*Q)**2 - 4*k*v3_*(k*v3_+Q*b))**0.5)/(2*k*v3_)
-                            lambda_t_4 = (-(2*v3_ + k*Q) - ((2*k*v3_+k*Q)**2 - 4*k*v3_*(k*v3_+Q*b))**0.5)/(2*k*v3_)
+                            lambda_t_1 = (-(2*v1 + k*Q) + ((2*k*v1+k*Q)**2 - 4*k*v1*(k*v1+Q*b))**0.5)/(2*k*v1)
+                            lambda_t_2 = (-(2*v1 + k*Q) - ((2*k*v1+k*Q)**2 - 4*k*v1*(k*v1+Q*b))**0.5)/(2*k*v1)
+                            v1_ = -v1
+                            lambda_t_3 = (-(2*v1_ + k*Q) + ((2*k*v1_+k*Q)**2 - 4*k*v1_*(k*v1_+Q*b))**0.5)/(2*k*v1_)
+                            lambda_t_4 = (-(2*v1_ + k*Q) - ((2*k*v1_+k*Q)**2 - 4*k*v1_*(k*v1_+Q*b))**0.5)/(2*k*v1_)
                             try:
                                 if np.isreal(lambda_t_1):
                                     if lambda_t_1 >1.0:
