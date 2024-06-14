@@ -950,18 +950,6 @@ def create_grid(h, w):
 
 
 
-def look_at_matrix(camera_position, target, up):
-  
-    z_axis = (camera_position - target) / np.linalg.norm(camera_position - target)
-    x_axis = np.cross(up, z_axis) / np.linalg.norm(np.cross(up, z_axis))
-    y_axis = np.cross(z_axis, x_axis)
-    
-    mat_rotation = np.stack((x_axis, y_axis, z_axis, [0, 0, 0]), axis=0)
-    mat_translation = np.array([[1, 0, 0, -camera_position[0]],
-                                [0, 1, 0, -camera_position[1]],
-                                [0, 0, 1, -camera_position[2]],
-                                [0, 0, 0, 1]])
-    return np.dot(mat_rotation.T, mat_translation)
 
 
 
@@ -1025,32 +1013,15 @@ def generate_camera_poses_around_ellipse(num_poses, angle_step,major_radius, min
 
 
 
-def generate_camera_trajectory(major_radius, minor_radius, num_poses,angle_step):
-    poses = []
-    for i in range(num_poses):
-        angle = np.deg2rad(360-angle_step * i/2)
-        cam_y = major_radius * np.sin(angle)
-        cam_z =  minor_radius* np.cos(angle)
-        look_at = np.array([0, 0, 0])  # 假设物体位于原点
-        camera_position = np.array([0, cam_y, cam_z])
-        up_direction = np.array([0, 1, 0])  # 假设“上”方向为Y轴正方向
-        
-        pose_matrix = look_at_matrix(camera_position, look_at, up_direction)
-        poses.append(pose_matrix)
-        
-    return poses
 
 
 
 
-def save_warped_image(save_path,images_lists,depth_lists,num_frames, degrees_per_frame,major_radius,minor_radius,inverse=False,up=False):
+
+def save_warped_image(save_path,images_lists,depth_lists,num_frames, degrees_per_frame,major_radius,minor_radius,inverse=False):
     num_frames = 25
-    if up:
-        poses = generate_camera_trajectory(major_radius, minor_radius,num_frames,degrees_per_frame)
-
-    else:
-        poses = generate_camera_poses_around_ellipse(num_frames, degrees_per_frame,major_radius, minor_radius,inverse=inverse)
-    near=0.1
+    poses = generate_camera_poses_around_ellipse(num_frames, degrees_per_frame,major_radius, minor_radius,inverse=inverse)
+    near=0.0001
     far=10000.
     focal = 260.
     K = np.eye(3)
@@ -1073,7 +1044,6 @@ def save_warped_image(save_path,images_lists,depth_lists,num_frames, degrees_per
         depth = np.load(depth_lists[i+1]).astype(np.float32)
         depth[depth < 1e-5] = 1e-5
         depth = 10000./depth 
-        depth = depth - depth.min()
         depth = np.clip(depth, near, far)
         warped_frame2, mask2,flow12= forward_warp(image, None, depth, pose_s, pose_t, K, None)
 
@@ -1105,7 +1075,10 @@ def save_warped_image(save_path,images_lists,depth_lists,num_frames, degrees_per
         mask_erosion[mask_erosion >= 0.2] = 1
         masks.append(torch.from_numpy(mask_erosion).unsqueeze(0))
 
+    
+
     masks = torch.cat(masks)
+
     return image_o,masks,cond_image
 
 
@@ -1226,7 +1199,6 @@ if __name__ == "__main__":
     parser.add_argument('--iteration',type=str)
     parser.add_argument('--weight_clamp',type=float,default=0.4 )
     parser.add_argument('--inverse',type=bool,default=False )
-    parser.add_argument('--up',type=bool,default=False )
     parser.add_argument('--degrees_per_frame',type=float,default=0.4 ) 
     args = parser.parse_args()
     
@@ -1248,13 +1220,12 @@ if __name__ == "__main__":
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 
-    image_o,masks, cond_image= save_warped_image(save_path,images_lists,depth_lists,num_frames,args.degrees_per_frame,args.major_radius,args.minor_radius,args.inverse,args.up)
+    image_o,masks, cond_image= save_warped_image(save_path,images_lists,depth_lists,num_frames,args.degrees_per_frame,args.major_radius,args.minor_radius,args.inverse)
 
     sigma_list = np.load('sigmas/sigmas_100.npy').tolist()
     lambda_ts = search_hypers(sigma_list,args.folder_path)
 
     svd_render(image_o,masks, cond_image,save_path,output_path,lambda_ts,args.lr,args.weight_clamp)
     
-
 
 

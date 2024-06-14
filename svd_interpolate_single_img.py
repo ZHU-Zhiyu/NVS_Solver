@@ -557,6 +557,7 @@ class StableVideoDiffusionPipeline(DiffusionPipeline):
                         image_latents.requires_grad_(True)         
                         latent_model_input = latent_model_input.detach()
                         latent_model_input.requires_grad = True
+                        # print('latent_model_input',latent_model_input.shape)
 
                         named_param = list(self.unet.named_parameters())
                         for n,p in named_param:
@@ -567,20 +568,20 @@ class StableVideoDiffusionPipeline(DiffusionPipeline):
                             temp_cond_latents1 = temp_cond_latents[:2,:,:,:40,:72]
                             mask1 = mask[0:1,:,:,:40,:72]
                         elif ii ==1:
-                            latent_model_input1 = latent_model_input[0:1,:,:,24:,:72]
-                            latents1 = latents[0:1,:,:,24:,:72]
-                            temp_cond_latents1 = temp_cond_latents[:2,:,:,24:,:72]
-                            mask1 = mask[0:1,:,:,24:,:72]
+                            latent_model_input1 = latent_model_input[0:1,:,:,32:,:72]
+                            latents1 = latents[0:1,:,:,32:,:72]
+                            temp_cond_latents1 = temp_cond_latents[:2,:,:,32:,:72]
+                            mask1 = mask[0:1,:,:,32:,:72]
                         elif ii ==2:
                             latent_model_input1 = latent_model_input[0:1,:,:,:40,56:]
                             latents1 = latents[0:1,:,:,:40,56:]
                             temp_cond_latents1 = temp_cond_latents[:2,:,:,:40,56:]
                             mask1 = mask[0:1,:,:,:40,56:]
                         elif ii ==3:
-                            latent_model_input1 = latent_model_input[0:1,:,:,24:,56:]
-                            latents1 = latents[0:1,:,:,24:,56:]
-                            temp_cond_latents1 = temp_cond_latents[:2,:,:,24:,56:]
-                            mask1 = mask[0:1,:,:,24:,56:]
+                            latent_model_input1 = latent_model_input[0:1,:,:,32:,56:]
+                            latents1 = latents[0:1,:,:,32:,56:]
+                            temp_cond_latents1 = temp_cond_latents[:2,:,:,32:,56:]
+                            mask1 = mask[0:1,:,:,32:,56:]
                         image_embeddings1 = image_embeddings[0:1,:,:]
                         added_time_ids1 =added_time_ids[0:1,:]
                         torch.cuda.empty_cache()
@@ -596,8 +597,8 @@ class StableVideoDiffusionPipeline(DiffusionPipeline):
                         grad = output.grad
                         grads.append(grad)
 
-                grads1 = torch.cat((grads[0],grads[1][:,:,:,16:,:]),-2)                
-                grads2 = torch.cat((grads[2],grads[3][:,:,:,16:,:]),-2)
+                grads1 = torch.cat((grads[0],grads[1][:,:,:,8:,:]),-2)                
+                grads2 = torch.cat((grads[2],grads[3][:,:,:,8:,:]),-2)
                 grads3 = torch.cat((grads1,grads2[:,:,:,:,16:]),-1)
                 latents = latents - grads3.half()
 
@@ -946,20 +947,6 @@ def create_grid(h, w):
 
 
 
-def look_at_matrix(camera_position, target, up):
-
-    z_axis = (camera_position - target) / np.linalg.norm(camera_position - target)
-    x_axis = np.cross(up, z_axis) / np.linalg.norm(np.cross(up, z_axis))
-    y_axis = np.cross(z_axis, x_axis)
-    
-    mat_rotation = np.stack((x_axis, y_axis, z_axis, [0, 0, 0]), axis=0)
-    mat_translation = np.array([[1, 0, 0, -camera_position[0]],
-                                [0, 1, 0, -camera_position[1]],
-                                [0, 0, 1, -camera_position[2]],
-                                [0, 0, 0, 1]])
-    return np.dot(mat_rotation.T, mat_translation)
-
-
 
 def normalize(v):
     norm = np.linalg.norm(v)
@@ -1025,7 +1012,7 @@ def generate_camera_poses_around_ellipse(num_poses, angle_step,major_radius, min
 def save_warped_image(save_path,image_path,depth_path,num_frames, degrees_per_frame,major_radius,minor_radius,inverse=False):
     num_frames = 25
     poses = generate_camera_poses_around_ellipse(num_frames, degrees_per_frame,major_radius, minor_radius,inverse=inverse)
-    near=0.1
+    near=0.0001
     far=500.
     focal = 260.
     K = np.eye(3)
@@ -1037,7 +1024,6 @@ def save_warped_image(save_path,image_path,depth_path,num_frames, degrees_per_fr
     depth = np.load(depth_path).astype(np.float32)
     depth[depth < 1e-5] = 1e-5
     depth = 10000./depth 
-    depth = depth - depth.min()
     depth = np.clip(depth, near, far)
     new_width, new_height = 1024,576  # New dimensions
     depth = cv2.resize(depth, (new_width, new_height), interpolation=cv2.INTER_NEAREST)
@@ -1221,7 +1207,6 @@ if __name__ == "__main__":
     lambda_ts = search_hypers(sigma_list,args.folder_path)
 
     svd_render(image_o,masks, cond_image,args.image_path,save_path,output_path,lambda_ts,args.lr,args.weight_clamp)
-
 
 
 

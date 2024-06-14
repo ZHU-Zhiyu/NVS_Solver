@@ -1166,8 +1166,7 @@ def search_hypers(pose,dists,sigmas,save_path):
                             lambda_t_list.append(1)
                         else:
                             dist_t = dists[tau]
-
-                            Q = v3 * abs((tau_-tau_p)) - v2*sigma_n
+                            Q = v3 * abs((dist_t)) - v2*sigma_n
                             k = 0.8
                             b = -0.2
 
@@ -1211,13 +1210,13 @@ def search_hypers(pose,dists,sigmas,save_path):
                         v_optimized = [v1,v2,v3]
                         lambda_t_list_optimized = lambda_t_list
                     
-    X = np.array(sigma_list)
+    X = np.array(sigmas)
 
     Y = np.arange(0,25,1)
     temp_i = np.array(temp_cond_indices)
     X, Y = np.meshgrid(X, Y)
     lambda_t_list_optimized = np.array(lambda_t_list_optimized)
-    lambda_t_list_optimized = lambda_t_list_optimized.reshape([len(sigma_list)-1,25])
+    lambda_t_list_optimized = lambda_t_list_optimized.reshape([len(sigmas),25])
 
     lambda_t_list_optimized = torch.tensor(lambda_t_list_optimized)
     Z= lambda_t_list_optimized
@@ -1255,7 +1254,6 @@ def warp_images(interpolated_poses,src1,src2,save_path):
         depth_l = np.load(os.path.join(img_path,'000001.npy'))
     elif os.path.exists(os.path.join(img_path,'000001.pfm')):
         depth_l,_ = read_pfm(os.path.join(img_path,'000001.pfm'))
-        print(depth_l.shape)
     new_width, new_height = 1024,576  # New dimensions
     depth_l = cv2.resize(depth_l, (new_width, new_height), interpolation=cv2.INTER_NEAREST)
 
@@ -1336,23 +1334,23 @@ if __name__ == "__main__":
     w = 1024 
     if args.dataset == 'dtu':
 
-        camera_extrinsics1 = np.loadtxt(f'/home/youmeng/youmeng/diffusers_final/example_imgs/multi/{args.scene}/000001.txt', skiprows=1, max_rows=3)
+        camera_extrinsics1 = np.loadtxt(f'example_imgs/multi/{args.scene}/000001.txt', skiprows=1, max_rows=3)
         R1 = camera_extrinsics1[:,0:3]
         T1 = camera_extrinsics1[0:3,3].reshape(3)
-        camera_extrinsics2 = np.loadtxt(f'/home/youmeng/youmeng/diffusers_final/example_imgs/multi/{args.scene}/000002.txt', skiprows=1, max_rows=3)
+        camera_extrinsics2 = np.loadtxt(f'example_imgs/multi/{args.scene}/000002.txt', skiprows=1, max_rows=3)
         R2 = camera_extrinsics2[:,0:3]
         T2 = camera_extrinsics2[0:3,3].reshape(3)
 
-        K = np.loadtxt(f'/home/youmeng/youmeng/diffusers_final/example_imgs/multi/{args.scene}/000001.txt', skiprows=7, max_rows=3)
+        K = np.loadtxt(f'example_imgs/multi/{args.scene}/000001.txt', skiprows=7, max_rows=3)
 
         K[0,0] = K[0,0]/640*1024*4; K[1,1] = K[1,1]/512*576.*4; K[0,2] = K[0,2]/640*1024*4; K[1,2] = K[1,2]/512*576.*4
         K = K.astype(np.float32)
 
 
     elif args.dataset == 'tat':
-        Rs = np.load(f'/home/youmeng/youmeng/diffusers_final/example_imgs/multi/{args.scene}/Rs.npy')
-        Ks = np.load(f'/home/youmeng/youmeng/diffusers_final/example_imgs/multi/{args.scene}/Ks.npy')
-        ts = np.load(f'/home/youmeng/youmeng/diffusers_final/example_imgs/multi/{args.scene}/ts.npy')
+        Rs = np.load(f'example_imgs/multi/{args.scene}/Rs.npy')
+        Ks = np.load(f'example_imgs/multi/{args.scene}/Ks.npy')
+        ts = np.load(f'example_imgs/multi/{args.scene}/ts.npy')
         R1 = Rs[src1-1]
         T1 = ts[src1-1].reshape(3)
         R2 = Rs[src2-1]
@@ -1373,7 +1371,7 @@ if __name__ == "__main__":
     interpolated_poses = pose_interpolation(pose_start,pose_end)
     dists,min_indice = compute_dists(interpolated_poses)
 
-    save_path = f'/home/youmeng/youmeng/diffusers_final/example_imgs/multi/{args.scene}/{args.scene}_src{src1}_{src2}/'
+    save_path = f'example_imgs/multi/{args.scene}/{args.scene}_src{src1}_{src2}/'
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 
