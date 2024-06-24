@@ -813,6 +813,331 @@ class EulerDiscreteScheduler(SchedulerMixin, ConfigMixin):
             return EulerDiscreteSchedulerOutput(prev_sample=prev_sample, pred_original_sample=pred_original_sample,grad = grad)
         else:
             return EulerDiscreteSchedulerOutput(prev_sample=prev_sample, pred_original_sample=pred_original_sample)
+
+
+    def step_single_dgs(
+        self,
+        model_output: torch.FloatTensor,
+        timestep: Union[float, torch.FloatTensor],
+        sample: torch.FloatTensor,
+        temp_cond_latents: Optional[torch.FloatTensor] = None,
+        mask: Optional[torch.FloatTensor] = None,
+        lambda_ts:Optional[torch.FloatTensor] = None,
+        step_i:Optional[torch.FloatTensor] = None,
+        weight_clamp:Optional[torch.FloatTensor] = None,
+        s_churn: float = 0.0,
+        s_tmin: float = 0.0,
+        s_tmax: float = float("inf"),
+        s_noise: float = 1.0,
+        generator: Optional[torch.Generator] = None,
+        return_dict: bool = True,
+    ) -> Union[EulerDiscreteSchedulerOutput, Tuple]:
+        """
+        Predict the sample from the previous timestep by reversing the SDE. This function propagates the diffusion
+        process from the learned model outputs (most often the predicted noise).
+
+        Args:
+            model_output (`torch.FloatTensor`):
+                The direct output from learned diffusion model.
+            timestep (`float`):
+                The current discrete timestep in the diffusion chain.
+            sample (`torch.FloatTensor`):
+                A current instance of a sample created by the diffusion process.
+            s_churn (`float`):
+            s_tmin  (`float`):
+            s_tmax  (`float`):
+            s_noise (`float`, defaults to 1.0):
+                Scaling factor for noise added to the sample.
+            generator (`torch.Generator`, *optional*):
+                A random number generator.
+            return_dict (`bool`):
+                Whether or not to return a [`~schedulers.scheduling_euler_discrete.EulerDiscreteSchedulerOutput`] or
+                tuple.
+
+        Returns:
+            [`~schedulers.scheduling_euler_discrete.EulerDiscreteSchedulerOutput`] or `tuple`:
+                If return_dict is `True`, [`~schedulers.scheduling_euler_discrete.EulerDiscreteSchedulerOutput`] is
+                returned, otherwise a tuple is returned where the first element is the sample tensor.
+        """
+
+        if (
+            isinstance(timestep, int)
+            or isinstance(timestep, torch.IntTensor)
+            or isinstance(timestep, torch.LongTensor)
+        ):
+            raise ValueError(
+                (
+                    "Passing integer indices (e.g. from `enumerate(timesteps)`) as timesteps to"
+                    " `EulerDiscreteScheduler.step()` is not supported. Make sure to pass"
+                    " one of the `scheduler.timesteps` as a timestep."
+                ),
+            )
+
+        if not self.is_scale_input_called:
+            logger.warning(
+                "The `scale_model_input` function should be called before `step` to ensure correct denoising. "
+                "See `StableDiffusionPipeline` for a usage example."
+            )
+
+        if self.step_index is None:
+            self._init_step_index(timestep)
+        self._step_index = step_i
+        # Upcast to avoid precision issues when computing prev_sample
+        sample = sample.to(torch.float32)
+
+        sigma = self.sigmas[self.step_index]
+
+        gamma = min(s_churn / (len(self.sigmas) - 1), 2**0.5 - 1) if s_tmin <= sigma <= s_tmax else 0.0
+
+        noise = randn_tensor(
+            model_output.shape, dtype=model_output.dtype, device=model_output.device, generator=generator
+        )
+
+        eps = noise * s_noise
+        sigma_hat = sigma * (gamma + 1)
+
+        if gamma > 0:
+            sample = sample + eps * (sigma_hat**2 - sigma**2) ** 0.5
+        # print(self.config.prediction_type)
+        # 1. compute predicted original sample (x_0) from sigma-scaled predicted noise
+        # NOTE: "original_sample" should not be an expected prediction_type but is left in for
+        # backwards compatibility
+        if self.config.prediction_type == "original_sample" or self.config.prediction_type == "sample":
+            pred_original_sample = model_output
+        elif self.config.prediction_type == "epsilon":
+            pred_original_sample = sample - sigma_hat * model_output
+        elif self.config.prediction_type == "v_prediction":
+            # denoised = model_output * c_out + input * c_skip
+            pred_original_sample = model_output * (-sigma / (sigma**2 + 1) ** 0.5) + (sample / (sigma**2 + 1))
+        else:
+            raise ValueError(
+                f"prediction_type given as {self.config.prediction_type} must be one of `epsilon`, or `v_prediction`"
+            )
+
+        # print(torch.std(pred_original_sample))
+        if temp_cond_latents is not None:
+            b,cond_len,c,h,w = temp_cond_latents.shape
+             
+
+
+            index_list = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
+
+            mask = (1-mask) > 0.5
+            mask_ones = torch.ones_like(mask[:,0:1,:,:,:])
+            mask = torch.cat((mask_ones,mask),1)
+            top_masks = []
+            for ii, tau in enumerate(index_list):
+                FEA = temp_cond_latents[1:2, tau,:,:,:]
+                weight = lambda_ts[self.step_index,tau]
+                mask_t = torch.mean(mask[:,tau,:,:,:].float(),1,keepdim=True)
+                mask_t = mask_t>0.5
+                mask_zero = ~mask_t
+                num_zero = torch.sum(mask_zero)
+
+
+                masked_tensor1 = pred_original_sample[:,tau,:,:,:] * mask_t
+                masked_tensor2 = FEA * mask_t
+                masked_diff = masked_tensor1 - masked_tensor2
+
+                # Flatten the differences and get absolute values
+                flat_diff = torch.abs(masked_diff.flatten())
+
+
+                # Sort differences and calculate the threshold
+                sorted_diff, indices = torch.sort(flat_diff)
+
+
+                weight = torch.clamp(weight,weight_clamp,1)
+                cutoff_index_s = num_zero-1
+                cutoff_index_e = int(weight * (len(sorted_diff)-num_zero))+num_zero
+                cutoff_value = sorted_diff[cutoff_index_e-1]
+                
+                # Create a new mask for the top 80% differences
+                top_mask = (torch.abs(masked_diff) <= cutoff_value) & mask_t
+                top_masks.append(top_mask)
+                pred_original_sample[:,tau,:,:,:][top_mask] =  FEA[top_mask]
+
+
+
+            pred_original_sample[:,0:1,:,:,:] = temp_cond_latents[1:2,0:1,:,:,:]
+            
+        # 2. Convert to an ODE derivative
+
+        derivative = (sample - pred_original_sample) / sigma_hat
+
+        dt = self.sigmas[self.step_index + 1] - sigma_hat
+
+        prev_sample = sample + derivative * dt
+
+        prev_sample = prev_sample.to(model_output.dtype)
+
+        # upon completion increase step index by one
+        self._step_index += 1
+
+        if not return_dict:
+            return (prev_sample,)
+
+        return EulerDiscreteSchedulerOutput(prev_sample=prev_sample, pred_original_sample=pred_original_sample)
+    def step_multi_dgs(
+        self,
+        model_output: torch.FloatTensor,
+        timestep: Union[float, torch.FloatTensor],
+        sample: torch.FloatTensor,
+        temp_cond_latents: Optional[torch.FloatTensor] = None,
+        mask: Optional[torch.FloatTensor] = None,
+        lambda_ts:Optional[torch.FloatTensor] = None,
+        step_i:Optional[torch.FloatTensor] = None,
+        s_churn: float = 0.0,
+        s_tmin: float = 0.0,
+        s_tmax: float = float("inf"),
+        s_noise: float = 1.0,
+        generator: Optional[torch.Generator] = None,
+        return_dict: bool = True,
+    ) -> Union[EulerDiscreteSchedulerOutput, Tuple]:
+        """
+        Predict the sample from the previous timestep by reversing the SDE. This function propagates the diffusion
+        process from the learned model outputs (most often the predicted noise).
+
+        Args:
+            model_output (`torch.FloatTensor`):
+                The direct output from learned diffusion model.
+            timestep (`float`):
+                The current discrete timestep in the diffusion chain.
+            sample (`torch.FloatTensor`):
+                A current instance of a sample created by the diffusion process.
+            s_churn (`float`):
+            s_tmin  (`float`):
+            s_tmax  (`float`):
+            s_noise (`float`, defaults to 1.0):
+                Scaling factor for noise added to the sample.
+            generator (`torch.Generator`, *optional*):
+                A random number generator.
+            return_dict (`bool`):
+                Whether or not to return a [`~schedulers.scheduling_euler_discrete.EulerDiscreteSchedulerOutput`] or
+                tuple.
+
+        Returns:
+            [`~schedulers.scheduling_euler_discrete.EulerDiscreteSchedulerOutput`] or `tuple`:
+                If return_dict is `True`, [`~schedulers.scheduling_euler_discrete.EulerDiscreteSchedulerOutput`] is
+                returned, otherwise a tuple is returned where the first element is the sample tensor.
+        """
+
+        if (
+            isinstance(timestep, int)
+            or isinstance(timestep, torch.IntTensor)
+            or isinstance(timestep, torch.LongTensor)
+        ):
+            raise ValueError(
+                (
+                    "Passing integer indices (e.g. from `enumerate(timesteps)`) as timesteps to"
+                    " `EulerDiscreteScheduler.step()` is not supported. Make sure to pass"
+                    " one of the `scheduler.timesteps` as a timestep."
+                ),
+            )
+
+        if not self.is_scale_input_called:
+            logger.warning(
+                "The `scale_model_input` function should be called before `step` to ensure correct denoising. "
+                "See `StableDiffusionPipeline` for a usage example."
+            )
+
+        if self.step_index is None:
+            self._init_step_index(timestep)
+        self._step_index = step_i
+        # print(self.step_index)
+        # Upcast to avoid precision issues when computing prev_sample
+        sample = sample.to(torch.float32)
+
+        sigma = self.sigmas[self.step_index]
+
+        gamma = min(s_churn / (len(self.sigmas) - 1), 2**0.5 - 1) if s_tmin <= sigma <= s_tmax else 0.0
+
+        noise = randn_tensor(
+            model_output.shape, dtype=model_output.dtype, device=model_output.device, generator=generator
+        )
+
+        eps = noise * s_noise
+        sigma_hat = sigma * (gamma + 1)
+
+        if gamma > 0:
+            sample = sample + eps * (sigma_hat**2 - sigma**2) ** 0.5
+        # 1. compute predicted original sample (x_0) from sigma-scaled predicted noise
+        # NOTE: "original_sample" should not be an expected prediction_type but is left in for
+        # backwards compatibility
+        if self.config.prediction_type == "original_sample" or self.config.prediction_type == "sample":
+            pred_original_sample = model_output
+        elif self.config.prediction_type == "epsilon":
+            pred_original_sample = sample - sigma_hat * model_output
+        elif self.config.prediction_type == "v_prediction":
+            # denoised = model_output * c_out + input * c_skip
+            pred_original_sample = model_output * (-sigma / (sigma**2 + 1) ** 0.5) + (sample / (sigma**2 + 1))
+        else:
+            raise ValueError(
+                f"prediction_type given as {self.config.prediction_type} must be one of `epsilon`, or `v_prediction`"
+            )
+
+        if temp_cond_latents is not None:
+            b,cond_len,c,h,w = temp_cond_latents.shape
+             
+
+
+            index_list = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+
+            mask = (1-mask) > 0.5
+            mask_ones = torch.ones_like(mask[:,0:1,:,:,:])
+            mask = torch.cat((mask_ones,mask),1)
+            top_masks = []
+            for ii, tau in enumerate(index_list):
+                FEA = temp_cond_latents[1:2, tau,:,:,:]
+                weight = lambda_ts[self.step_index,tau]
+                mask_t = torch.mean(mask[:,tau,:,:,:].float(),1,keepdim=True)
+                mask_t = mask_t>0.5
+                mask_zero = ~mask_t
+                num_zero = torch.sum(mask_zero)
+
+
+                masked_tensor1 = pred_original_sample[:,tau,:,:,:] * mask_t
+                masked_tensor2 = FEA * mask_t
+                masked_diff = masked_tensor1 - masked_tensor2
+
+                # Flatten the differences and get absolute values
+                flat_diff = torch.abs(masked_diff.flatten())
+
+
+                # Sort differences and calculate the  threshold
+                sorted_diff, indices = torch.sort(flat_diff)
+
+
+                weight = torch.clamp(weight,0.4,1)
+                cutoff_index_s = num_zero-1
+                cutoff_index_e = int(weight * (len(sorted_diff)-num_zero))+num_zero
+                cutoff_value = sorted_diff[cutoff_index_e-1]
+                
+                # Create a new mask for the top 80% differences
+                top_mask = (torch.abs(masked_diff) <= cutoff_value) & mask_t
+
+
+
+                pred_original_sample[:,tau,:,:,:][top_mask] =  FEA[top_mask]
+
+
+            pred_original_sample[:,0:1,:,:,:] = temp_cond_latents[1:2,0:1,:,:,:]
+
+        derivative = (sample - pred_original_sample) / sigma_hat
+
+        dt = self.sigmas[self.step_index + 1] - sigma_hat
+
+        prev_sample = sample + derivative * dt
+
+        prev_sample = prev_sample.to(model_output.dtype)
+
+        # upon completion increase step index by one
+        self._step_index += 1
+
+        if not return_dict:
+            return (prev_sample,)
+
+        return EulerDiscreteSchedulerOutput(prev_sample=prev_sample, pred_original_sample=pred_original_sample)
     
 
     def add_noise(
@@ -850,4 +1175,3 @@ class EulerDiscreteScheduler(SchedulerMixin, ConfigMixin):
 
     def __len__(self):
         return self.config.num_train_timesteps
-
