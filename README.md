@@ -54,7 +54,14 @@
 [license-shield]: https://img.shields.io/github/license/ZHU-Zhiyu/NVS_Solver.svg?style=for-the-badge
 [license-url]: https://github.com/ZHU-Zhiyu/NVS_Solver/blob/master/LICENSE.txt
 
-## Getting Started [We are preparing the code for arbitrary poses and scenes.]
+## To do list
+
+- [x] Release NVS-Solver for SVD;
+- [ ] Release abitrary Trajectory; 
+- [ ] Support T2V diffusion model, e.g., OpenSora;
+- [ ] ....
+
+## Getting Started 
 
 ### Dependencies
 
