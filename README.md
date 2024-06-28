@@ -101,7 +101,9 @@ Run
 bash demo.sh
 ```
 ### Our pipeline for abitrary trajectory
-<img src='./Assets/arbitrary/1.gif' width='230'> <img src='./Assets/arbitrary/2.gif' width='230'> <img src='./Assets/arbitrary/3.gif' width='230'> <img src='./Assets/arbitrary/4.gif' width='230'> 
+<img src='./Assets/arbitrary/1.gif' width='230'> <img src='./Assets/arbitrary/2.gif' width='230'> 
+
+<img src='./Assets/arbitrary/3.gif' width='230'> <img src='./Assets/arbitrary/4.gif' width='230'> 
 #### Prepare depth model
 First please prepare [Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V2). As our pipeline read depth as npy file, so please edit the [run.py](https://github.com/DepthAnything/Depth-Anything-V2/blob/main/run.py) for saving predicted depth maps as npy:
 1. add this after [line 57](https://github.com/DepthAnything/Depth-Anything-V2/blob/main/run.py#L57)
