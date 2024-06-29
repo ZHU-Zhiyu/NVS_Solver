@@ -142,5 +142,16 @@ python svd_interpolate_single_img_traj.py --image_path "$IMG_PATH" --folder_path
 
 
 ## Acknowledgement
-Our code is based on [diffusers](https://huggingface.co/docs/diffusers/index).
+Thanks for the following wonderful works: [Diffusers](https://huggingface.co/docs/diffusers/index), [Depth Anything](https://github.com/LiheYoung/Depth-Anything), [Depth AnythingV2](https://github.com/DepthAnything/Depth-Anything-V2)..
 
+## Citation
+
+If you find the project is interesting, please cite
+   ```sh
+@article{you2024nvs,
+  title={NVS-Solver: Video Diffusion Model as Zero-Shot Novel View Synthesizer},
+  author={You, Meng and Zhu, Zhiyu and Liu, Hui and Hou, Junhui},
+  journal={arXiv preprint arXiv:2405.15364},
+  year={2024}
+}
+   ```
