@@ -57,8 +57,9 @@
 ## To do list
 
 - [x] Release NVS-Solver for SVD;
-- [ ] Release NVS-Solver for abitrary trajectory; 
+- [x] Release NVS-Solver for abitrary trajectory; 
 - [ ] Support T2V diffusion model, e.g., OpenSora;
+- [ ] Acceleration with ODE-Solvers, e.g., DPM-Solver;
 - [ ] ....
 
 ## Getting Started 
