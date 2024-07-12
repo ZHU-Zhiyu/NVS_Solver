@@ -57,8 +57,9 @@
 ## To do list
 
 - [x] Release NVS-Solver for SVD;
-- [ ] Release NVS-Solver for abitrary trajectory; 
-- [ ] Support T2V diffusion model, e.g., OpenSora;
+- [x] Release NVS-Solver for abitrary trajectory; 
+- [ ] Support T2V diffusion models, we are testing some effective [video diffusion models](https://huggingface.co/spaces/Vchitect/VBench_Leaderboard), e.g., [LaVie](https://github.com/Vchitect/LaVie), [t2v-turbo](https://github.com/Ji4chenLi/t2v-turbo);
+- [ ] Acceleration with ODE-Solvers, e.g., DPM-Solver;
 - [ ] ....
 
 ## Getting Started 
@@ -101,6 +102,9 @@ Run
 bash demo.sh
 ```
 ### Our pipeline for abitrary trajectory
+<img src='./Assets/arbitrary/1.gif' width='230'> <img src='./Assets/arbitrary/2.gif' width='230'> 
+
+<img src='./Assets/arbitrary/3.gif' width='230'> <img src='./Assets/arbitrary/4.gif' width='230'> 
 #### Prepare depth model
 First please prepare [Depth Anything V2](https://github.com/DepthAnything/Depth-Anything-V2). As our pipeline read depth as npy file, so please edit the [run.py](https://github.com/DepthAnything/Depth-Anything-V2/blob/main/run.py) for saving predicted depth maps as npy:
 1. add this after [line 57](https://github.com/DepthAnything/Depth-Anything-V2/blob/main/run.py#L57)
@@ -138,5 +142,16 @@ python svd_interpolate_single_img_traj.py --image_path "$IMG_PATH" --folder_path
 
 
 ## Acknowledgement
-Our code is based on [diffusers](https://huggingface.co/docs/diffusers/index).
+Thanks for the following wonderful works: [Diffusers](https://huggingface.co/docs/diffusers/index), [Depth Anything](https://github.com/LiheYoung/Depth-Anything), [Depth AnythingV2](https://github.com/DepthAnything/Depth-Anything-V2)..
 
+## Citation
+
+If you find the project is interesting, please cite
+   ```sh
+@article{you2024nvs,
+  title={NVS-Solver: Video Diffusion Model as Zero-Shot Novel View Synthesizer},
+  author={You, Meng and Zhu, Zhiyu and Liu, Hui and Hou, Junhui},
+  journal={arXiv preprint arXiv:2405.15364},
+  year={2024}
+}
+   ```
