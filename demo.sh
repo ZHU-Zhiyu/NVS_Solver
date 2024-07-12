@@ -27,7 +27,7 @@ python svd_interpolate_dyn_img.py --folder_path "$DIR_PATH" --iteration 3 --majo
 python svd_interpolate_two_img.py --lr 0.02 --scene scan1 --src1 23 --src2 26 --dataset dtu
 
 
-##################DGS MODE##################
+##################DGS MODE#################
 
 ###single image
 
