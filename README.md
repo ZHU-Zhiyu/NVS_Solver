@@ -101,6 +101,7 @@ Run
 ```
 bash demo.sh
 ```
+We provide the prompt images utilized in our experiments at [single image](https://drive.google.com/drive/folders/1eEB4U65RlEbqo4s4vTQSBH16929sGvQO?usp=sharing) and [dynamic videos](https://drive.google.com/drive/folders/1w6tyGRg6SIFPGCPBgUffPruWsm7z3pos).
 ### Our pipeline for abitrary trajectory
 <img src='./Assets/arbitrary/1.gif' width='230'> <img src='./Assets/arbitrary/2.gif' width='230'> 
 
