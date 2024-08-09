@@ -54,9 +54,7 @@
 [license-shield]: https://img.shields.io/github/license/ZHU-Zhiyu/NVS_Solver.svg?style=for-the-badge
 [license-url]: https://github.com/ZHU-Zhiyu/NVS_Solver/blob/master/LICENSE.txt
 
-### 360 degree 
-We can synthesize 360 degree scenes from single or multiple inputs.
-
+### NVS-Solver for 360° NVS
 <img src='./Assets/360/park.gif' width='230'> <img src='./Assets/360/caterpillar.gif' width='230'> 
 
 ## News!!
