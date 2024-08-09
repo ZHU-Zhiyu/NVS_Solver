@@ -54,6 +54,9 @@
 [license-shield]: https://img.shields.io/github/license/ZHU-Zhiyu/NVS_Solver.svg?style=for-the-badge
 [license-url]: https://github.com/ZHU-Zhiyu/NVS_Solver/blob/master/LICENSE.txt
 
+### NVS-Solver for 360° NVS
+<img src='./Assets/360/park.gif' width='230'> <img src='./Assets/360/caterpillar.gif' width='230'> 
+
 ## News!!
 - :fire::fire::fire: [08/08/2024] NVS-Solver is available in [rerun](https://rerun.io/examples/generative-vision/mini_nvs_solver), and a [mini-demo](https://github.com/pablovela5620/mini-nvs-solver).
 
