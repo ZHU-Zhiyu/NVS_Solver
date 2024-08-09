@@ -54,6 +54,9 @@
 [license-shield]: https://img.shields.io/github/license/ZHU-Zhiyu/NVS_Solver.svg?style=for-the-badge
 [license-url]: https://github.com/ZHU-Zhiyu/NVS_Solver/blob/master/LICENSE.txt
 
+## News!!
+- :fire::fire::fire: [08/08/2024] NVS-Solver is available in [rerun](https://rerun.io/examples/generative-vision/mini_nvs_solver), and a [mini-demo](https://github.com/pablovela5620/mini-nvs-solver).
+
 ## To do list
 
 - [x] Release NVS-Solver for SVD;
@@ -101,6 +104,7 @@ Run
 ```
 bash demo.sh
 ```
+We provide the prompt images utilized in our experiments at [single image](https://drive.google.com/drive/folders/1eEB4U65RlEbqo4s4vTQSBH16929sGvQO?usp=sharing) and [dynamic videos](https://drive.google.com/drive/folders/1w6tyGRg6SIFPGCPBgUffPruWsm7z3pos).
 ### Our pipeline for abitrary trajectory
 <img src='./Assets/arbitrary/1.gif' width='230'> <img src='./Assets/arbitrary/2.gif' width='230'> 
 
