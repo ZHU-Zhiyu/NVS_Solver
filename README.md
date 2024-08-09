@@ -56,6 +56,10 @@
 
 ### NVS-Solver for 360° NVS
 <img src='./Assets/360/park.gif' width='230'> <img src='./Assets/360/caterpillar.gif' width='230'> 
+### NVS-Solver for moving animal/person
+<img src='./Assets/animals&people/camel1.gif' width='230'> <img src='./Assets/animals&people/camel2.gif' width='230'> 
+
+<img src='./Assets/animals&people/72.gif' width='230'> <img src='./Assets/animals&people/82.gif' width='230'> 
 
 ## News!!
 - :fire::fire::fire: [08/08/2024] NVS-Solver is available in [rerun](https://rerun.io/examples/generative-vision/mini_nvs_solver), and a [mini-demo](https://github.com/pablovela5620/mini-nvs-solver).
