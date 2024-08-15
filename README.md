@@ -68,7 +68,7 @@
 
 - [x] Release NVS-Solver for SVD;
 - [x] Release NVS-Solver for abitrary trajectory; 
-- [ ] Support T2V diffusion models, we are testing some effective [video diffusion models](https://huggingface.co/spaces/Vchitect/VBench_Leaderboard), e.g., [LaVie](https://github.com/Vchitect/LaVie), [t2v-turbo](https://github.com/Ji4chenLi/t2v-turbo);
+- [ ] Support T2V diffusion models, we are testing some effective [video diffusion models](https://huggingface.co/spaces/Vchitect/VBench_Leaderboard), e.g., [CogVideo](https://github.com/THUDM/CogVideo), [LaVie](https://github.com/Vchitect/LaVie), [t2v-turbo](https://github.com/Ji4chenLi/t2v-turbo);
 - [ ] Acceleration with ODE-Solvers, e.g., DPM-Solver;
 - [ ] ....
 
