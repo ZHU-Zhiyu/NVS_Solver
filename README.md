@@ -9,7 +9,7 @@
 <br />
 <div align="center">
 
-  <h3 align="center">NVS-Solver: Video Diffusion Model as Zero-Shot Novel View Synthesizer</h3>
+  <h3 align="center">[ICLR2025] NVS-Solver: Video Diffusion Model as Zero-Shot Novel View Synthesizer</h3>
   <p align="center">
     <a href="https://arxiv.org/abs/2405.15364">Arxiv</a>
     ·
@@ -62,6 +62,7 @@
 <img src='./Assets/animals&people/72.gif' width='230'> <img src='./Assets/animals&people/82.gif' width='230'> 
 
 ## News!!
+- :fire::fire::fire: [03/02/2025] NVS-Solver is accpected by [ICLR 2025](https://openreview.net/pdf?id=zDJf7fvdid).
 - :fire::fire::fire: [08/08/2024] NVS-Solver is available in [rerun](https://rerun.io/examples/generative-vision/mini_nvs_solver), and a [mini-demo](https://github.com/pablovela5620/mini-nvs-solver).
 
 ## To do list
