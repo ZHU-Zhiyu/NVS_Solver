@@ -160,10 +160,10 @@ Thanks for the following wonderful works: [Diffusers](https://huggingface.co/doc
 
 If you find the project is interesting, please cite
    ```sh
-@article{you2024nvs,
+@inproceedings{you2025nvs,
   title={NVS-Solver: Video Diffusion Model as Zero-Shot Novel View Synthesizer},
   author={You, Meng and Zhu, Zhiyu and Liu, Hui and Hou, Junhui},
-  journal={arXiv preprint arXiv:2405.15364},
-  year={2024}
+  booktitle={International Conference on Learning Representations},
+  year={2025}
 }
    ```
